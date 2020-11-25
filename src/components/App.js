@@ -15,6 +15,7 @@ function App() {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cartItem")) || []
   );
+  const [selectValue, setSelectValue] = useState("");
 
   useEffect(() => {
     localStorage.setItem("cartItem", JSON.stringify(cartItems));
@@ -55,14 +56,17 @@ function App() {
     setAllProducts(uniqueArr.length < 1 ? products : uniqueArr);
   };
 
-  const sortHigh = () => {
-    let highSort = [...products].sort((a, b) => b.price - a.price);
-    setAllProducts(highSort);
-  };
-
-  const sortLow = () => {
-    let lowSort = [...products].sort((a, b) => a.price - b.price);
-    setAllProducts(lowSort);
+  const sortProducts = (event) => {
+    setSelectValue(event.target.value);
+    if (event.target.value === "low") {
+      let lowSort = [...products].sort((a, b) => a.price - b.price);
+      setAllProducts(lowSort);
+    } else if (event.target.value === "high") {
+      let highSort = [...products].sort((a, b) => b.price - a.price);
+      setAllProducts(highSort);
+    } else {
+      setAllProducts(products);
+    }
   };
 
   return (
@@ -74,8 +78,8 @@ function App() {
         <Main
           products={allProducts}
           setCartItems={setCartItems}
-          sortHigh={sortHigh}
-          sortLow={sortLow}
+          selectValue={selectValue}
+          sortProducts={sortProducts}
         />
       </section>
       <section>

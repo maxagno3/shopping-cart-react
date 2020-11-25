@@ -1,11 +1,16 @@
 import React from "react";
 import uuid from "react-uuid";
 
-function Main({ products, setCartItems, sortHigh, sortLow }) {
+function Main({ products, setCartItems, selectValue, sortProducts }) {
   return (
     <>
-      <button onClick={() => sortHigh()}>Low to High</button>
-      <button onClick={() => sortLow()}>High to Low</button>
+      {/* <button onClick={() => sortHigh()}>Low to High</button>
+      <button onClick={() => sortLow()}>High to Low</button> */}
+      <select value={selectValue} onChange={sortProducts}>
+        <option value="none">------</option>
+        <option value="high">Sort to high</option>
+        <option value="low">Sort to low</option>
+      </select>
       <ul>
         {products.map((product) => {
           return (
