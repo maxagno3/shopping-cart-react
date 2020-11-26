@@ -58,6 +58,7 @@ function App() {
 
   const sortProducts = (event) => {
     setSelectValue(event.target.value);
+
     if (event.target.value === "low") {
       let lowSort = [...products].sort((a, b) => a.price - b.price);
       setAllProducts(lowSort);
@@ -69,8 +70,15 @@ function App() {
     }
   };
 
+  const removeCartItems = (cartItemId) => {
+    const removeItem = cartItems.filter(
+      (cartItem) => cartItem.id !== cartItemId
+    );
+    setCartItems(removeItem);
+  };
+
   return (
-    <main>
+    <main className="container mx-auto">
       <aside>
         <Sidebar sizes={sizes} filterSizes={filterSizes} />
       </aside>
@@ -83,7 +91,7 @@ function App() {
         />
       </section>
       <section>
-        <Cart cartItems={cartItems} />
+        <Cart cartItems={cartItems} removeCartItems={removeCartItems} />
       </section>
     </main>
   );
