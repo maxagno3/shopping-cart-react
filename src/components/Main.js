@@ -4,7 +4,7 @@ import uuid from "react-uuid";
 function Main({ products, setCartItems, selectValue, sortProducts }) {
   return (
     <>
-      <select value={selectValue} onChange={sortProducts}>
+      <select value={selectValue} onChange={sortProducts} className="bg-red-300 text-center ml-5">
         <option value="none">------</option>
         <option value="high">Sort to high</option>
         <option value="low">Sort to low</option>

@@ -77,6 +77,20 @@ function App() {
     setCartItems(removeItem);
   };
 
+  const increaseQuantity = (id) => {
+    const increment = cartItems.filter((item) => {
+      return item.id === id ? (item.quantity += 1) : item;
+    });
+    setCartItems(increment);
+  };
+
+  const decreaseQuantity = (id) => {
+    const decrement = cartItems.filter((item) => {
+      return item.id === id ? (item.quantity -= 1) : item;
+    });
+    setCartItems(decrement);
+  };
+
   return (
     <main className="container mx-auto">
       <aside>
@@ -91,7 +105,12 @@ function App() {
         />
       </section>
       <section>
-        <Cart cartItems={cartItems} removeCartItems={removeCartItems} />
+        <Cart
+          cartItems={cartItems}
+          removeCartItems={removeCartItems}
+          increaseQuantity={increaseQuantity}
+          decreaseQuantity={decreaseQuantity}
+        />
       </section>
     </main>
   );

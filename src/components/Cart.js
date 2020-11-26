@@ -1,7 +1,7 @@
 import React from "react";
 import uuid from "react-uuid";
 
-function Cart({ cartItems, removeCartItems }) {
+function Cart({ cartItems, removeCartItems, increaseQuantity, decreaseQuantity }) {
   return (
     <div>
       <ul>
@@ -14,7 +14,15 @@ function Cart({ cartItems, removeCartItems }) {
             <p>{cartItem.title}</p>
             <div className="flex items-center">
               <h2>Quantity:</h2>
-              <h3 className="ml-1">{cartItem.quantity}</h3>
+              {cartItem.quantity > 1 ? (
+                <>
+                  <button onClick={()=>decreaseQuantity(cartItem.id)}>-</button>
+                  <h3 className="ml-1">{cartItem.quantity}</h3>
+                  <button onClick={()=>increaseQuantity(cartItem.id)}>+</button>
+                </>
+              ) : (
+                <h3 className="ml-1">{cartItem.quantity}</h3>
+              )}
             </div>
             <p>Price: {cartItem.currencyFormat + cartItem.price}</p>
             {cartItem.quantity === 1 && (
